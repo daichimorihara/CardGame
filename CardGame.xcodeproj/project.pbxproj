@@ -14,6 +14,10 @@
 		4288514E271071FD000D4106 /* CardGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288514D271071FD000D4106 /* CardGameTests.swift */; };
 		42885158271071FD000D4106 /* CardGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42885157271071FD000D4106 /* CardGameUITests.swift */; };
 		4288515A271071FD000D4106 /* CardGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42885159271071FD000D4106 /* CardGameUITestsLaunchTests.swift */; };
+		4288516727107250000D4106 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288516627107250000D4106 /* MemoryGame.swift */; };
+		42885169271072DF000D4106 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42885168271072DF000D4106 /* EmojiMemoryGame.swift */; };
+		4288516B2710731B000D4106 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288516A2710731B000D4106 /* Pie.swift */; };
+		4288516D2710733D000D4106 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288516C2710733D000D4106 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		42885153271071FD000D4106 /* CardGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42885157271071FD000D4106 /* CardGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameUITests.swift; sourceTree = "<group>"; };
 		42885159271071FD000D4106 /* CardGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4288516627107250000D4106 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
+		42885168271072DF000D4106 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
+		4288516A2710731B000D4106 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		4288516C2710733D000D4106 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,10 @@
 				4288513E271071FC000D4106 /* ContentView.swift */,
 				42885140271071FD000D4106 /* Assets.xcassets */,
 				42885142271071FD000D4106 /* Preview Content */,
+				4288516627107250000D4106 /* MemoryGame.swift */,
+				42885168271072DF000D4106 /* EmojiMemoryGame.swift */,
+				4288516A2710731B000D4106 /* Pie.swift */,
+				4288516C2710733D000D4106 /* Cardify.swift */,
 			);
 			path = CardGame;
 			sourceTree = "<group>";
@@ -257,8 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4288516D2710733D000D4106 /* Cardify.swift in Sources */,
+				4288516B2710731B000D4106 /* Pie.swift in Sources */,
+				4288516727107250000D4106 /* MemoryGame.swift in Sources */,
 				4288513F271071FC000D4106 /* ContentView.swift in Sources */,
 				4288513D271071FC000D4106 /* CardGameApp.swift in Sources */,
+				42885169271072DF000D4106 /* EmojiMemoryGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
