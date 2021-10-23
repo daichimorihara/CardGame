@@ -10,17 +10,21 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
-    static let emojis = ["🚗","🚀","✈️","🚁","🛥","⚓️","🦼","🚛","🚒","🧩","🎲","🎹","🎨","🏅"]
+//    static let emojis = ["🚗","🚀","✈️","🚁","🛥","⚓️","🦼","🚛","🚒","🧩","🎲","🎹","🎨","🏅"]
     
     @Published private var game: MemoryGame<String>
     
-    init() {
-        game = Self.createEmojiMemoryGame()
+    var theme: Theme
+    
+    init(theme: Theme) {
+        self.theme = theme
+        game = Self.createEmojiMemoryGame(with: theme)
         }
     
-    static private func createEmojiMemoryGame() -> MemoryGame<String> {
+    static private func createEmojiMemoryGame(with theme: Theme) -> MemoryGame<String> {
         MemoryGame(numberOfPairs: 4, createCardContent: { index in
-            emojis[index]
+//            emojis[index]
+            theme.emojis.map{ String($0) }[index]
         })
     }
     
@@ -38,7 +42,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-        game = Self.createEmojiMemoryGame()
+        game = Self.createEmojiMemoryGame(with: theme)
     }
 }
 

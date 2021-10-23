@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CardGameApp: App {
+    @StateObject var store = ThemeStore()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(document: EmojiMemoryGame())
+            ThemeChooser(store: store)
         }
     }
 }

@@ -1,16 +1,17 @@
 //
-//  ContentView.swift
+//  CardGameView.swift
 //  CardGame
 //
-//  Created by Daichi Morihara on 2021/10/08.
+//  Created by Daichi Morihara on 2021/10/23.
 //
 
 import SwiftUI
 
-
-struct ContentView: View {
+struct CardGameView: View {
     @ObservedObject var document: EmojiMemoryGame
     @Namespace var namespacing
+
+    
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -22,9 +23,18 @@ struct ContentView: View {
                     restart
                 }
             }
-            deck.padding(.bottom)
+            deck.padding(.bottom).foregroundColor(themeColor(of: document.theme))
         }
         .padding()
+    }
+    
+    private func themeColor(of theme: Theme) -> Color {
+        switch theme.color {
+        case "red": return .red
+        case "blue": return .blue
+        case "green": return .green
+        default: return .yellow
+        }
     }
     var cardbody: some View {
         ScrollView {
@@ -134,9 +144,9 @@ struct CardView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(document: EmojiMemoryGame())
-    }
-}
 
+//struct CardGameView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardGameView(document: EmojiMemoryGame(theme: <#T##Theme#>))
+//    }
+//}
