@@ -22,7 +22,7 @@ class EmojiMemoryGame: ObservableObject {
         }
     
     static private func createEmojiMemoryGame(with theme: Theme) -> MemoryGame<String> {
-        MemoryGame(numberOfPairs: 4, createCardContent: { index in
+        MemoryGame(numberOfPairs: theme.numbers, createCardContent: { index in
 //            emojis[index]
             theme.emojis.map{ String($0) }[index]
         })
@@ -42,6 +42,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
+        game.cards.removeAll()
         game = Self.createEmojiMemoryGame(with: theme)
     }
 }
