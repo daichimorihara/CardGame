@@ -42,7 +42,6 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-        game.cards.removeAll()
         game = Self.createEmojiMemoryGame(with: theme)
     }
 }

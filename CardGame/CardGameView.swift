@@ -122,8 +122,8 @@ struct CardGameView: View {
     var restart: some View {
         Button("Restart") {
             withAnimation {
-                dealt.removeAll()
                 document.restart()
+                dealt = []
             }
         }
     }
@@ -158,7 +158,7 @@ struct CardView: View {
 //                    .padding(DrawingConstants.padding)
                 Text(card.content)
                     .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
-                    .animation(Animation.linear(duration: 1.0).repeatForever(autoreverses: false))
+                    .animation(Animation.linear(duration: 1.0).repeatCount(2, autoreverses: false))
                     .font(Font.system(size: DrawingConstants.fontSize))
                     .scaleEffect(scale(thatFits: geometry.size))
                    // .font(fontSize(in: geometry.size))
@@ -182,10 +182,3 @@ struct CardView: View {
         static let fontSize: CGFloat = 32
     }
 }
-
-
-//struct CardGameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardGameView(document: EmojiMemoryGame(theme: <#T##Theme#>))
-//    }
-//}
