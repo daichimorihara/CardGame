@@ -10,15 +10,9 @@ import SwiftUI
 struct ThemeChooser: View {
     @ObservedObject var store: ThemeStore
     @State private var editMode: EditMode = .inactive
-    @State private var isPresented = false
-    @State private var selectedTheme: Theme?
-    @State private var themeToAdd: Theme = Theme(name: "", emojis: "", numbers: 2, color: "red", id: 0)
-//    @State private var themeAndGame: [Theme : EmojiMemoryGame ] = [:]
-//    [Theme(name: "Animals", emojis: "🐱🐶🐭🐹🐼🐻🦊🐰🐨🐯🦁", numbers: 3, color: "red", id: 1) : EmojiMemoryGame(theme: Theme(name: "Animals", emojis: "🐱🐶🐭🐹🐼🐻🦊🐰🐨🐯🦁", numbers: 3, color: "red", id: 1)),
-//     Theme(name: "Vehicles", emojis: "🚗🚕🚙🚌🚑🚓🏎🚎", numbers: 4, color: "blue", id: 2) : EmojiMemoryGame(theme: Theme(name: "Vehicles", emojis: "🚗🚕🚙🚌🚑🚓🏎🚎", numbers: 4, color: "blue", id: 2)),
-//     Theme(name: "Food", emojis: "🍎🍏🍋🍌🍉🍇🍒🍈🍆🥒🥑", numbers: 5, color: "green", id: 3) : EmojiMemoryGame(theme: Theme(name: "Food", emojis: "🍎🍏🍋🍌🍉🍇🍒🍈🍆🥒🥑", numbers: 5, color: "green", id: 3))
-//    ]
-    
+    @State private var plusIsPresented = false
+    @State private var editIsPresented = false
+    @State private var selectedTheme: Theme = Theme(name: "", emojis: "", numbers: 2, color: "red", id: 0)
     
     var body: some View {
         NavigationView {
@@ -39,8 +33,7 @@ struct ThemeChooser: View {
                             }
                             .lineLimit(1)
                         }
-                        .gesture(editMode == .active ? TapGesture().onEnded { selectedTheme = theme } : nil)
-                        
+                        .gesture(editMode == .active ? tap(theme: theme) : nil)
                     }
                 }
                 .onDelete { indexSet in
@@ -53,42 +46,45 @@ struct ThemeChooser: View {
                 }
             }
             .navigationBarItems(leading: Button(action: {
-                isPresented = true
+                plusIsPresented = true
             }) {
                 Image(systemName: "plus")
             }, trailing: EditButton() )
-            .sheet(item: $selectedTheme) { theme in
+            .sheet(isPresented: $editIsPresented) {
                 NavigationView {
-                    ThemeEditor(theme: $store.themes[theme])
+                    ThemeEditor(theme: $selectedTheme)
                         .navigationTitle("Theme Editor")
                         .navigationBarTitleDisplayMode(.inline)
-                        .navigationBarItems(leading: Button("Close") {
-                            selectedTheme = nil
+                        .navigationBarItems(leading: Button("Cancel") {
+                            selectedTheme = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
+                            editIsPresented = false
+                        }, trailing: Button("Save") {
+                            store.updata(from: selectedTheme)
+                            selectedTheme = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
+                            editIsPresented = false
                         })
                 }
             }
-            .sheet(isPresented: $isPresented) {
+            .sheet(isPresented: $plusIsPresented) {
                 NavigationView {
-                    ThemeEditor(theme: $themeToAdd)
+                    ThemeEditor(theme: $selectedTheme)
                         .alert(item: $alertToShow) { alertToShow in
                             alertToShow.alert()
                         }
                         .navigationTitle("Theme Editor")
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(leading: Button("Cancel") {
-                            themeToAdd = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
-                            isPresented = false
+                            selectedTheme = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
+                            plusIsPresented = false
                         }, trailing: Button("Save") {
-                            themeToAdd.id = store.themes.max(by: { $0.id < $1.id })!.id + 1
-                            if themeToAdd.emojis.map({ String($0) }).count > 1 {
-                                store.themes.append(themeToAdd)
-                                themeToAdd = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
-                                isPresented = false
+                            selectedTheme.id = store.themes.max(by: { $0.id < $1.id })!.id + 1
+                            if selectedTheme.emojis.map({ String($0) }).count > 1 {
+                                store.themes.append(selectedTheme)
+                                selectedTheme = Theme(name: "New", emojis: "", numbers: 2, color: "red", id: 0)
+                                plusIsPresented = false
                             } else {
                                 showMinimumNumberAlert()
                             }
-//                            themeToAdd = Theme(name: "New", emojis: "", numbers: 2, color: "", id: 0)
-//                            isPresented = false
                         })
                 }
             }
@@ -119,6 +115,14 @@ struct ThemeChooser: View {
         case "gray": return .gray
         default: return .red
         }
+    }
+    
+    private func tap(theme: Theme) -> some Gesture {
+        TapGesture()
+            .onEnded {
+                editIsPresented = true
+                selectedTheme = theme
+            }
     }
 }
 

@@ -40,6 +40,16 @@ class ThemeStore: ObservableObject {
     }
     
     // Mark - Intent
+    func updata(from theme: Theme) {
+        var newTheme = themes.filter({ $0.id == theme.id }).onlyOne!
+        newTheme.name = theme.name
+        newTheme.emojis = theme.emojis
+        newTheme.numbers = theme.numbers
+        newTheme.color = theme.color
+        if let index = themes.firstIndex(where: { $0.id == newTheme.id }) {
+            themes[index] = newTheme
+        }
+    }
     
     
 }
